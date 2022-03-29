@@ -7,7 +7,7 @@ public class AIController : MonoBehaviour
     private Vector3 move;
     public float speed, jumForce, gravity, verticalVelocity;
 
-    private bool wallSlide, jump;
+    private bool wallSlide, jump, superJump;
 
     private bool doubleJump;
     private CharacterController charController;
@@ -23,6 +23,20 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.finish)
+        {
+
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Dance"))
+            {
+                anim.SetTrigger("Dance");
+                transform.eulerAngles = Vector3.up * 180;
+            }
+            return;
+        }
+
+        if (!GameManager.instance.start)
+            return;
+
         move = Vector3.zero;
         move = transform.forward;
 
@@ -33,6 +47,18 @@ public class AIController : MonoBehaviour
             verticalVelocity = 0;
             RayCasting();
         }
+
+
+        if(superJump)
+        {
+            superJump = false;
+            verticalVelocity = jumForce * 1.75f;
+            if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+                anim.SetTrigger("Jump");
+
+            
+        }
+ 
 
         if (!wallSlide)
         {
@@ -96,6 +122,10 @@ public class AIController : MonoBehaviour
             if (verticalVelocity < 0)
                 wallSlide = true;
         }
+
+        
+        if(hit.collider.tag == "Trampoline" && charController.isGrounded)
+            superJump = true;
 
         if(hit.collider.tag == "Slide" && charController.isGrounded)
         {

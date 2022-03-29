@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class CheckPoints : MonoBehaviour
 {
-
     [HideInInspector]
     public GameObject[] checkPoints;
 
     [HideInInspector]
     public int currentCheckPoint = 1;
-    
+
 
     void Awake()
     {
@@ -23,7 +22,7 @@ public class CheckPoints : MonoBehaviour
         foreach(GameObject cp in checkPoints)
         {
             cp.AddComponent<CurrentCheckPoint>();
-            cp.GetComponent<CurrentCheckPoint>().currentCheckNumber = currentCheckPoint;
+            cp.GetComponent<CurrentCheckPoint>().currenctCheckNumber = currentCheckPoint;
             cp.name = "CheckPoint" + currentCheckPoint;
             currentCheckPoint++;
         }

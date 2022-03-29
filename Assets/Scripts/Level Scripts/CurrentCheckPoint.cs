@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CurrentCheckPoint : MonoBehaviour
 {
-    public int currentCheckNumber;
+    public int currenctCheckNumber;
 }
