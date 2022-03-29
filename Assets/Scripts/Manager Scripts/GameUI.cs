@@ -9,6 +9,12 @@ public class GameUI : MonoBehaviour
     public static GameUI instance;
     public GameObject inGame, leaderboard;
 
+    public Text currentLevelText, nextLevelText;
+
+    public Image fill;
+
+    public Sprite oragne, gray;
+
     private Button nextLevel;
     public Text countText;
 
@@ -52,7 +58,26 @@ public class GameUI : MonoBehaviour
     {
         inGame.SetActive(false);
         leaderboard.SetActive(true);
-        //Current level = current level
+
+
+        if (GameManager.instance.failed)
+        {
+            currentLevelText.text = PlayerPrefs.GetInt("Level", 1).ToString();
+            nextLevelText.text = PlayerPrefs.GetInt("Level", 1) + 1 + "";
+            fill.sprite = gray;
+        }
+
+        else
+        {
+            currentLevelText.text = PlayerPrefs.GetInt("Level", 1) -1 + "";
+            nextLevelText.text = PlayerPrefs.GetInt("Level", 1).ToString();
+            fill.sprite = oragne;
+        }
+
+
+
+
+
     }
 
     private void Restart()

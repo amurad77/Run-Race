@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/2.unity
     guid: f602cc03dbc66034ebe0e876c513124e
+  - enabled: 1
+    path: Assets/Scenes/ColorSelection.unity
+    guid: a4225eca326ddaa4fb09bf3c94432b83
   m_configObjects: {}

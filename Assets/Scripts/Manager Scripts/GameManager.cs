@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class GameManager : MonoBehaviour
@@ -84,8 +85,9 @@ public class GameManager : MonoBehaviour
                 {
                     if(rs.gameObject.name == "Player")
                     {
-                        GameUI.instance.OpenLB();
                         failed = true;
+                        GameUI.instance.OpenLB();
+                        
                     }
 
                     if (thirdPlace == "")
@@ -108,6 +110,8 @@ public class GameManager : MonoBehaviour
             if (runners.Length < 2)
             {
                 finish = true;
+                if(SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("Level"))
+                    PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
             }
         }
     }

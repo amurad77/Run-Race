@@ -14,10 +14,17 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
 
+    private SkinnedMeshRenderer playerColor;
+    public Material[] colors;
+
     void Awake()
     {
+        playerColor = GameObject.Find("PlayerColor").GetComponent<SkinnedMeshRenderer>();
         charController = GetComponent<CharacterController>();
         anim = transform.GetChild(0).GetComponent<Animator>();
+        gameObject.name = PlayerPrefs.GetString("PlayerName", "Player");
+
+        playerColor.material = colors[PlayerPrefs.GetInt("PlayerColor", 0)];
     }
 
     void Update()
